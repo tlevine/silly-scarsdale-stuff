@@ -1,0 +1,19 @@
+```{r}
+library(scarsdale)
+library(ggplot2)
+library(knitr)
+```
+
+How many fireplaces are in Scarsdale House?
+
+```{r fig.width=7, fig.height=6}
+df <- query('select property_number, address, fireplaces from properties;')
+ggplot(df) + aes(x = fireplaces) + geom_histogram()
+```
+
+What kind of a house has nine fireplaces?
+
+```{r, results = 'asis'}
+df <- query('select property_number, address, fireplaces from properties order by fireplaces desc limit 5;')
+kable(df)
+```
